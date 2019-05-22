@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="The land of freedom">
 <meta property="og:description" content="安全协议笔记一、PKI引言攻击类型被动攻击，主动攻击 安全需求保密性，完整性，认证性，抗抵赖性，访问控制，可用性 安全机制加密：提供保密性，认证性和完整性保护 数字签名：提供认证性，完整性保护，抗抵赖性 校验和/哈希算法：提供完整性保护，认证性 对称加密块加密：加密固定大小的数据块 流加密： 非对称加密加密信息和验证签名的密钥不能用来解密和创建签名 作用： ​        密钥分发：如何在不存在">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-22T14:03:20.910Z">
+<meta property="og:updated_time" content="2019-05-22T14:09:26.693Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Notes of Security Protocols">
 <meta name="twitter:description" content="安全协议笔记一、PKI引言攻击类型被动攻击，主动攻击 安全需求保密性，完整性，认证性，抗抵赖性，访问控制，可用性 安全机制加密：提供保密性，认证性和完整性保护 数字签名：提供认证性，完整性保护，抗抵赖性 校验和/哈希算法：提供完整性保护，认证性 对称加密块加密：加密固定大小的数据块 流加密： 非对称加密加密信息和验证签名的密钥不能用来解密和创建签名 作用： ​        密钥分发：如何在不存在">
@@ -599,9 +599,7 @@
 <li><p>允许多次封装即嵌套封装</p>
 </li>
 </ul>
-<p>###安全协议</p>
-<p>####1.Keberos协议</p>
-<p>1.基本传输模型</p>
+<h3 id="安全协议"><a href="#安全协议" class="headerlink" title="安全协议"></a>安全协议</h3><h4 id="1-Keberos协议"><a href="#1-Keberos协议" class="headerlink" title="1.Keberos协议"></a>1.Keberos协议</h4><p>1.基本传输模型</p>
 <p>(1) C -&gt; AS : IDc || Pc || IDv</p>
 <p>(2) AS -&gt; C  : Ticket</p>
 <p>(3) C  -&gt; V   : IDc  || Ticket</p>
@@ -676,8 +674,7 @@ TS5 +1 ：使C确信这不是就回答的重放
 <p>提供了对服务器得认证</p>
 <p>时间戳：</p>
 <p>防止对Ticket和认证符的重放攻击</p>
-<p>####IPSEC</p>
-<p>IPsec分为两种，一种是AH协议，另外一种是ESP协议</p>
+<h4 id="IPSEC"><a href="#IPSEC" class="headerlink" title="IPSEC"></a>IPSEC</h4><p>IPsec分为两种，一种是AH协议，另外一种是ESP协议</p>
 <p>AH: Authentication Header</p>
 <p>ESP: Encapsulating Security Payload</p>
 <p>其中AH是实现了鉴别的协议，而ESP是实现了加密和鉴别的协议</p>
@@ -697,10 +694,10 @@ TS5 +1 ：使C确信这不是就回答的重放
 <p>2.隧道模式<br>隧道模式对整个IP数据包提供保护。</p>
 <p>当IP包加AH或ESP域后，整个数据包加安全域被当作一个新的IP包的载荷，并拥有一个新的外部IP报头。原来或内部的整个包利用隧道在网间传输。<br>当SA的一端或两端为安全网关时使用隧道模式。</p>
 <p>ESP加密和认证（可选）整个内部IP包<br>AH认证整个内部IP包和外部IP报头中的选中部分</p>
-<p>######AH：<br>为IP包提供数据完整性和认证功能，防止地址欺骗和重放攻击</p>
+<h6 id="AH："><a href="#AH：" class="headerlink" title="AH："></a>AH：</h6><p>为IP包提供数据完整性和认证功能，防止地址欺骗和重放攻击</p>
 <p>传输模式：不改变IP地址，插入一个AH</p>
 <p>隧道模式：生成一个新的IP头，把AH和原来的整个IP包放到新IP包的载荷数据中</p>
-<p>######ESP：<br>提供保密功能，包括报文内容的机密性和有限的通信量的机密性，也可以提供认证服务（可选）</p>
+<h6 id="ESP："><a href="#ESP：" class="headerlink" title="ESP："></a>ESP：</h6><p>提供保密功能，包括报文内容的机密性和有限的通信量的机密性，也可以提供认证服务（可选）</p>
 <p>将需要保密的用户数据进行加密后再封装到一个新的IP包中，ESP只认证ESP头之后的信息</p>
 <p>加密算法和认证算法由SA指定</p>
 <p>两种模式：传输模式和隧道模式</p>
@@ -708,8 +705,7 @@ TS5 +1 ：使C确信这不是就回答的重放
 <p>对原载荷后加一个ESP尾部，实现加密，然后再原载荷前加一个头，实现认证，把认证结果存在最后面的MAC中</p>
 <p>隧道模式：</p>
 <p>在原载荷后加一个ESP尾部，实现加密，然后在最前插入一个ESP头部，实现认证，把认证结果放到最后的MAC，然后再生成一个新的IP头。</p>
-<p>######IPSEC密钥管理</p>
-<p>手动管理和自动管理</p>
+<h6 id="IPSEC密钥管理"><a href="#IPSEC密钥管理" class="headerlink" title="IPSEC密钥管理"></a>IPSEC密钥管理</h6><p>手动管理和自动管理</p>
 <p>两阶段协商：</p>
 <p>The first phase, 建立起ISAKMP SA<br>– 双方(例如ISAKMP Servers)商定如何保护以后的通讯，通信双方建立一个已通过身份鉴别和安全保护的通道<br>– 此SA将用于保护后面的protocol SA的协商过程</p>
 <p>The second phase, 建立起针对其他安全协议的SA(比如，IPSec SA)<br>– 这个阶段可以建立多个SA<br>– 此SA将被相应的安全协议用于保护数据或者消息的交换</p>
@@ -724,43 +720,36 @@ TS5 +1 ：使C确信这不是就回答的重放
 <p>模式协商</p>
 <p>Diffie-hellman交换和Nonce交换</p>
 <p>身份验证。<br>主模式的特点<br>身份保护<br>对ISAKMP协商能力的完全应用。</p>
-<p>####3.SSL<br>位于传输层之上，应用层之下，只能应用在TCP上，因为他依赖于可靠的连接。</p>
-<p>#####SSL连接（connection)</p>
-<p>*一个连接是一个提供一种合适类型服务的传输（OSI分层的定义）。</p>
+<h4 id="3-SSL"><a href="#3-SSL" class="headerlink" title="3.SSL"></a>3.SSL</h4><p>位于传输层之上，应用层之下，只能应用在TCP上，因为他依赖于可靠的连接。</p>
+<h5 id="SSL连接（connection"><a href="#SSL连接（connection" class="headerlink" title="SSL连接（connection)"></a>SSL连接（connection)</h5><p>*一个连接是一个提供一种合适类型服务的传输（OSI分层的定义）。</p>
 <p>*SSL的连接是点对点的关系。</p>
 <p>*连接是暂时的，每一个连接和一个会话关联。</p>
-<p>#####SSL会话（session）</p>
-<p>*一个SSL会话是在客户与服务器之间的一个关联。会话由Handshake Protocol创建。会话定义了一组可供多个连接共享的密码安全参数。</p>
+<h5 id="SSL会话（session）"><a href="#SSL会话（session）" class="headerlink" title="SSL会话（session）"></a>SSL会话（session）</h5><p>*一个SSL会话是在客户与服务器之间的一个关联。会话由Handshake Protocol创建。会话定义了一组可供多个连接共享的密码安全参数。</p>
 <p><em>会话用以避免为每一个连接提供新的安全参数所需昂贵的协商代价。
 </em>一个会话可以为多个连接提供服务</p>
-<p>#####SSL记录协议<br>建立在可靠的传输协议(如TCP)之上</p>
+<h5 id="SSL记录协议"><a href="#SSL记录协议" class="headerlink" title="SSL记录协议"></a>SSL记录协议</h5><p>建立在可靠的传输协议(如TCP)之上</p>
 <p>它提供连接安全性，有两个特点：</p>
 <pre><code>*保密性，使用了对称加密算法
 
 *完整性，使用HMAC算法
 </code></pre><p>用来封装高层的协议</p>
-<p>#####SSL数据流传输<br>*1.分段</p>
+<h5 id="SSL数据流传输"><a href="#SSL数据流传输" class="headerlink" title="SSL数据流传输"></a>SSL数据流传输</h5><p>*1.分段</p>
 <p>*2.压缩</p>
 <p>*3.添加MAC摘要（完整性保护）</p>
 <p>*4.加密（机密性保护）</p>
 <p>*5.添加SSL记录头</p>
-<p>#####SSL的过程（4个阶段）</p>
-<p>######第一阶段：建立起安全协商</p>
-<p>客户发送一个client_hello消息，包括以下参数：版本、随机数(32位时间戳+28字节随机序列)、会话ID、客户支持的密码算法列表(CipherSuite)、客户支持的压缩方法列表.然后，客户等待服务器的server_hello消息</p>
+<h5 id="SSL的过程（4个阶段）"><a href="#SSL的过程（4个阶段）" class="headerlink" title="SSL的过程（4个阶段）"></a>SSL的过程（4个阶段）</h5><h6 id="第一阶段：建立起安全协商"><a href="#第一阶段：建立起安全协商" class="headerlink" title="第一阶段：建立起安全协商"></a>第一阶段：建立起安全协商</h6><p>客户发送一个client_hello消息，包括以下参数：版本、随机数(32位时间戳+28字节随机序列)、会话ID、客户支持的密码算法列表(CipherSuite)、客户支持的压缩方法列表.然后，客户等待服务器的server_hello消息</p>
 <p>服务器发送server_hello消息，参数：客户建议的低版本以及服务器支持的最高版本、服务器产生的随机数、会话ID、服务器从客户建议的密码算法和压缩方法中确定一套本次连接使用的确定方法.</p>
-<p>######第二阶段：服务器鉴别和密钥交换</p>
-<p>1.服务器发送certificate消息，消息包含一个X.509证书，或者一条证书链<br>除了匿名DH之外的密钥交换方法都需要</p>
+<h6 id="第二阶段：服务器鉴别和密钥交换"><a href="#第二阶段：服务器鉴别和密钥交换" class="headerlink" title="第二阶段：服务器鉴别和密钥交换"></a>第二阶段：服务器鉴别和密钥交换</h6><p>1.服务器发送certificate消息，消息包含一个X.509证书，或者一条证书链<br>除了匿名DH之外的密钥交换方法都需要</p>
 <p>2.服务器发送server_key_exchange消息<br>可选的，有些情况下可以不需要。只有当certificate消息没有包含必需的数据的时候才发送此消息<br>消息包含签名，被签名的内容包括两个随机数以及服务器参数</p>
 <p>3.服务器发送certificate_request消息（可选）<br>    <em>非匿名server可以向客户请求一个证书
     </em>包含证书类型和CAs</p>
 <p>4.服务器发送server_hello_done, 然后等待应答</p>
-<p>######第三阶段：客户鉴别和密钥交换</p>
-<p>1.客户收到server_done消息后，它根据需要检查服务器提供的证书，并判断server_hello的参数是否可以接受，如果都没有问题的话，发送一个或多个消息给服务器。</p>
+<h6 id="第三阶段：客户鉴别和密钥交换"><a href="#第三阶段：客户鉴别和密钥交换" class="headerlink" title="第三阶段：客户鉴别和密钥交换"></a>第三阶段：客户鉴别和密钥交换</h6><p>1.客户收到server_done消息后，它根据需要检查服务器提供的证书，并判断server_hello的参数是否可以接受，如果都没有问题的话，发送一个或多个消息给服务器。</p>
 <p>2.如果服务器请求证书的话，则客户首先发送一个certificate消息，若客户没有证书，则发送一个no_certificate警告。 </p>
 <p>3.然后客户发送client_key_exchange消息，消息的内容取决于密钥交换的类型（如果是RSA，则含加密的PreMasterSecret）。</p>
 <p>4.最后，客户发送一个certificate_verify消息（可选），其中包含一个签名，对从第一条消息以来的所有握手消息的HMAC值(用master_secret)进行签名</p>
-<p>######第四阶段：结束</p>
-<p>1.第四阶段建立起一个安全的连接</p>
+<h6 id="第四阶段：结束"><a href="#第四阶段：结束" class="headerlink" title="第四阶段：结束"></a>第四阶段：结束</h6><p>1.第四阶段建立起一个安全的连接</p>
 <p>2.客户发送一个change_cipher_spec消息，并且把协商得到的CipherSuite拷贝到当前连接的状态之中。然后，客户用本次连接协商的算法、密钥参数发送一个finished消息，这条消息可以检查密钥交换和鉴别过程是否已经成功。其中包括一个校验值，对所有以来的消息进行校验。</p>
 <p>3.服务器同样发送change_cipher_spec消息和finished消息。</p>
 <p>4.握手过程完成，客户和服务器可以交换应用层数据。</p>
@@ -768,16 +757,13 @@ TS5 +1 ：使C确信这不是就回答的重放
 <p>如果采用DH，则是双方随机数共同生成的</p>
 <p>然后master_key是由SSL固定提供的算法生成，参数包括两个随机数，premasterkey。。</p>
 <p>最终需要的一些密钥（例如服务器写密钥等是由mater——key通过特定算法导出的）</p>
-<p>####SET协议</p>
-<p>#####提供服务</p>
-<p>(1)保证客户交易信息的保密性和完整性</p>
+<h4 id="SET协议"><a href="#SET协议" class="headerlink" title="SET协议"></a>SET协议</h4><h5 id="提供服务"><a href="#提供服务" class="headerlink" title="提供服务"></a>提供服务</h5><p>(1)保证客户交易信息的保密性和完整性</p>
 <p>SET协议采用了双重签名技术对SET交易过程中消费者的支付信息和订单信息分别签名，使得商家看不到支付信息，只能接收用户的订单信息；而金融机构看不到交易内容，只能接收到用户支付信息和帐户信息，从而充分保证了消费者帐户和定购信息的安全性。</p>
 <p>(2)确保商家和客户交易行为的不可否认性</p>
 <p>SET协议的重点就是确保商家和客户的身份认证和交易行为的不可否认性。其理论基础就是不可否认机制，采用的核心技术包括X.509电子证书标准，数字签名，报文摘要，双重签名等技术。</p>
 <p>(3)确保商家和客户的合法性（认证）</p>
 <p>SET协议使用数字证书对交易各方的合法性进行验证。通过数字证书的验证，可以确保交易中的商家和客户都是合法的，可信赖的。</p>
-<p>#####交易流程：</p>
-<p>(1)客户在网上商店看中商品后，和商家进行磋商，然后发出请求购买信息。（初始请求）</p>
+<h5 id="交易流程："><a href="#交易流程：" class="headerlink" title="交易流程："></a>交易流程：</h5><p>(1)客户在网上商店看中商品后，和商家进行磋商，然后发出请求购买信息。（初始请求）</p>
 <p>(2) 客户与商家交换握手信息，确认商家和客户两端均合法。（初始响应）</p>
 <p>(3)客户的电子钱包形成一个包含订购信息与支付指令的报文发送给商家。（购买请求）</p>
 <p>(4)商家将含有客户支付指令的信息发送给支付网关。（授权请求）</p>
@@ -946,7 +932,7 @@ TS5 +1 ：使C确信这不是就回答的重放
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安全协议笔记"><span class="nav-text">安全协议笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、PKI引言"><span class="nav-text">一、PKI引言</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#攻击类型"><span class="nav-text">攻击类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安全需求"><span class="nav-text">安全需求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安全机制"><span class="nav-text">安全机制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对称加密"><span class="nav-text">对称加密</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#非对称加密"><span class="nav-text">非对称加密</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#比较"><span class="nav-text">比较</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Hash-函数"><span class="nav-text">Hash 函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MAC"><span class="nav-text">MAC</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数字签名"><span class="nav-text">数字签名</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#密钥管理"><span class="nav-text">密钥管理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PKI-Public-Key-Infrastructure"><span class="nav-text">PKI (Public Key Infrastructure)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、PKI基础设施概念与框架"><span class="nav-text">二、PKI基础设施概念与框架</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#公钥基础设施PKI"><span class="nav-text">公钥基础设施PKI</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#属性证书-Attribute-Certificate"><span class="nav-text">属性证书(Attribute Certificate)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PKI服务的认证性实现"><span class="nav-text">PKI服务的认证性实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PKI服务的保密性实现"><span class="nav-text">PKI服务的保密性实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PKI服务的不可否认性的实现"><span class="nav-text">PKI服务的不可否认性的实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PKI系统结构组成"><span class="nav-text">PKI系统结构组成</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#认证中心CA"><span class="nav-text">认证中心CA</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CA密钥管理"><span class="nav-text">CA密钥管理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#用户密钥管理"><span class="nav-text">用户密钥管理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CA中心基本结构"><span class="nav-text">CA中心基本结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#RA中心"><span class="nav-text">RA中心</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#略"><span class="nav-text">略</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#三、证书和证书注销列表"><span class="nav-text">三、证书和证书注销列表</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ASN-1"><span class="nav-text">ASN.1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ASN-1-具体编码-略"><span class="nav-text">ASN.1 具体编码 略</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数字证书"><span class="nav-text">数字证书</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#基本证书结构和语义"><span class="nav-text">基本证书结构和语义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#证书注销列表-CRL"><span class="nav-text">证书注销列表 CRL</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#OCSP在线证书状态协议"><span class="nav-text">* OCSP在线证书状态协议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#属性证书"><span class="nav-text">属性证书</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、信任模型"><span class="nav-text">四、信任模型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#单一直接信任"><span class="nav-text">单一直接信任</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#严格层次结构"><span class="nav-text">严格层次结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对等结构（交叉认证）-N个CA"><span class="nav-text">对等结构（交叉认证）(N个CA)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#网状结构"><span class="nav-text">网状结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#用户为中心的结构"><span class="nav-text">用户为中心的结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#混合模型"><span class="nav-text">混合模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、公开密钥密码体制标准"><span class="nav-text">五、公开密钥密码体制标准</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#PCKS（Public-Key-Cryptography-Standard）"><span class="nav-text">PCKS（Public-Key Cryptography Standard）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、认证中心标准"><span class="nav-text">六、认证中心标准</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#X509认证"><span class="nav-text">X509认证</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#简单认证"><span class="nav-text">简单认证</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#强认证（采用公钥密码技术）"><span class="nav-text">强认证（采用公钥密码技术）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PKIX系列标准"><span class="nav-text">PKIX系列标准</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#证书政策CP与认证实施声明CPS"><span class="nav-text">证书政策CP与认证实施声明CPS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#轻量级目录服务LDAP"><span class="nav-text">轻量级目录服务LDAP</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#LDAP在PKI中的应用"><span class="nav-text">LDAP在PKI中的应用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Operational-Protocols-FTP-and-HTTP"><span class="nav-text">Operational Protocols- FTP and HTTP</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Online-Certificate-Status-Protocol-–OCSP"><span class="nav-text">Online Certificate Status Protocol –OCSP</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Time-Stamp-Protocols-TSP"><span class="nav-text">Time Stamp Protocols -TSP</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#补：Cryptographic-Message-Syntax-CMS"><span class="nav-text">补：Cryptographic Message Syntax (CMS)</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安全协议笔记"><span class="nav-text">安全协议笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、PKI引言"><span class="nav-text">一、PKI引言</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#攻击类型"><span class="nav-text">攻击类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安全需求"><span class="nav-text">安全需求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安全机制"><span class="nav-text">安全机制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对称加密"><span class="nav-text">对称加密</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#非对称加密"><span class="nav-text">非对称加密</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#比较"><span class="nav-text">比较</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Hash-函数"><span class="nav-text">Hash 函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MAC"><span class="nav-text">MAC</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数字签名"><span class="nav-text">数字签名</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#密钥管理"><span class="nav-text">密钥管理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PKI-Public-Key-Infrastructure"><span class="nav-text">PKI (Public Key Infrastructure)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、PKI基础设施概念与框架"><span class="nav-text">二、PKI基础设施概念与框架</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#公钥基础设施PKI"><span class="nav-text">公钥基础设施PKI</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#属性证书-Attribute-Certificate"><span class="nav-text">属性证书(Attribute Certificate)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PKI服务的认证性实现"><span class="nav-text">PKI服务的认证性实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PKI服务的保密性实现"><span class="nav-text">PKI服务的保密性实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PKI服务的不可否认性的实现"><span class="nav-text">PKI服务的不可否认性的实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PKI系统结构组成"><span class="nav-text">PKI系统结构组成</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#认证中心CA"><span class="nav-text">认证中心CA</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CA密钥管理"><span class="nav-text">CA密钥管理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#用户密钥管理"><span class="nav-text">用户密钥管理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CA中心基本结构"><span class="nav-text">CA中心基本结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#RA中心"><span class="nav-text">RA中心</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#略"><span class="nav-text">略</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#三、证书和证书注销列表"><span class="nav-text">三、证书和证书注销列表</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ASN-1"><span class="nav-text">ASN.1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ASN-1-具体编码-略"><span class="nav-text">ASN.1 具体编码 略</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数字证书"><span class="nav-text">数字证书</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#基本证书结构和语义"><span class="nav-text">基本证书结构和语义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#证书注销列表-CRL"><span class="nav-text">证书注销列表 CRL</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#OCSP在线证书状态协议"><span class="nav-text">* OCSP在线证书状态协议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#属性证书"><span class="nav-text">属性证书</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、信任模型"><span class="nav-text">四、信任模型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#单一直接信任"><span class="nav-text">单一直接信任</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#严格层次结构"><span class="nav-text">严格层次结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对等结构（交叉认证）-N个CA"><span class="nav-text">对等结构（交叉认证）(N个CA)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#网状结构"><span class="nav-text">网状结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#用户为中心的结构"><span class="nav-text">用户为中心的结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#混合模型"><span class="nav-text">混合模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、公开密钥密码体制标准"><span class="nav-text">五、公开密钥密码体制标准</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#PCKS（Public-Key-Cryptography-Standard）"><span class="nav-text">PCKS（Public-Key Cryptography Standard）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、认证中心标准"><span class="nav-text">六、认证中心标准</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#X509认证"><span class="nav-text">X509认证</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#简单认证"><span class="nav-text">简单认证</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#强认证（采用公钥密码技术）"><span class="nav-text">强认证（采用公钥密码技术）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PKIX系列标准"><span class="nav-text">PKIX系列标准</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#证书政策CP与认证实施声明CPS"><span class="nav-text">证书政策CP与认证实施声明CPS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#轻量级目录服务LDAP"><span class="nav-text">轻量级目录服务LDAP</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#LDAP在PKI中的应用"><span class="nav-text">LDAP在PKI中的应用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Operational-Protocols-FTP-and-HTTP"><span class="nav-text">Operational Protocols- FTP and HTTP</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Online-Certificate-Status-Protocol-–OCSP"><span class="nav-text">Online Certificate Status Protocol –OCSP</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Time-Stamp-Protocols-TSP"><span class="nav-text">Time Stamp Protocols -TSP</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#补：Cryptographic-Message-Syntax-CMS"><span class="nav-text">补：Cryptographic Message Syntax (CMS)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安全协议"><span class="nav-text">安全协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Keberos协议"><span class="nav-text">1.Keberos协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IPSEC"><span class="nav-text">IPSEC</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#AH："><span class="nav-text">AH：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#ESP："><span class="nav-text">ESP：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#IPSEC密钥管理"><span class="nav-text">IPSEC密钥管理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-SSL"><span class="nav-text">3.SSL</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#SSL连接（connection"><span class="nav-text">SSL连接（connection)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SSL会话（session）"><span class="nav-text">SSL会话（session）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SSL记录协议"><span class="nav-text">SSL记录协议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SSL数据流传输"><span class="nav-text">SSL数据流传输</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SSL的过程（4个阶段）"><span class="nav-text">SSL的过程（4个阶段）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#第一阶段：建立起安全协商"><span class="nav-text">第一阶段：建立起安全协商</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#第二阶段：服务器鉴别和密钥交换"><span class="nav-text">第二阶段：服务器鉴别和密钥交换</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#第三阶段：客户鉴别和密钥交换"><span class="nav-text">第三阶段：客户鉴别和密钥交换</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#第四阶段：结束"><span class="nav-text">第四阶段：结束</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SET协议"><span class="nav-text">SET协议</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#提供服务"><span class="nav-text">提供服务</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#交易流程："><span class="nav-text">交易流程：</span></a></li></ol></li></div>
             
 
           </div>
