@@ -1,0 +1,921 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
+
+
+
+
+
+
+<meta name="description" content="计算机系统原理笔记一、系统的概念二、数据的机器级表示与处理 一个附属的补码等于模减该负数的绝对值 对于某一确定的模，某数减去小于模的另一数，总可以用该数加上另一数负数的补码来代替 若同时有无符号和带符号证书，则C编译器将带符号整数强制转换为无符号数 规格化尾数的小数点后第一位总是1，故规定第一位默的“1”不明显表示出来。这样可用23个数位表示24位尾数。 在浮点数中，除数为0的结果是无穷大，不是溢">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Computer System">
+<meta property="og:url" content="http://yoursite.com/2019/05/22/Computer System/index.html">
+<meta property="og:site_name" content="The land of freedom">
+<meta property="og:description" content="计算机系统原理笔记一、系统的概念二、数据的机器级表示与处理 一个附属的补码等于模减该负数的绝对值 对于某一确定的模，某数减去小于模的另一数，总可以用该数加上另一数负数的补码来代替 若同时有无符号和带符号证书，则C编译器将带符号整数强制转换为无符号数 规格化尾数的小数点后第一位总是1，故规定第一位默的“1”不明显表示出来。这样可用23个数位表示24位尾数。 在浮点数中，除数为0的结果是无穷大，不是溢">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-27T05:30:02.361Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Computer System">
+<meta name="twitter:description" content="计算机系统原理笔记一、系统的概念二、数据的机器级表示与处理 一个附属的补码等于模减该负数的绝对值 对于某一确定的模，某数减去小于模的另一数，总可以用该数加上另一数负数的补码来代替 若同时有无符号和带符号证书，则C编译器将带符号整数强制转换为无符号数 规格化尾数的小数点后第一位总是1，故规定第一位默的“1”不明显表示出来。这样可用23个数位表示24位尾数。 在浮点数中，除数为0的结果是无穷大，不是溢">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/22/Computer System/">
+
+
+
+
+
+  <title> Computer System | The land of freedom </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">The land of freedom</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A new start , a long way</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/22/Computer System/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Vshows">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://picm.photophoto.cn/015/037/003/0370030771.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="The land of freedom">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Computer System
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-22T12:13:16+08:00">
+                2019-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="计算机系统原理笔记"><a href="#计算机系统原理笔记" class="headerlink" title="计算机系统原理笔记"></a>计算机系统原理笔记</h1><h3 id="一、系统的概念"><a href="#一、系统的概念" class="headerlink" title="一、系统的概念"></a>一、系统的概念</h3><h3 id="二、数据的机器级表示与处理"><a href="#二、数据的机器级表示与处理" class="headerlink" title="二、数据的机器级表示与处理"></a>二、数据的机器级表示与处理</h3><ul>
+<li>一个附属的补码等于模减该负数的绝对值</li>
+<li>对于某一确定的模，某数减去小于模的另一数，总可以用该数加上另一数负数的补码来代替</li>
+<li>若同时有无符号和带符号证书，则C编译器将带符号整数强制转换为无符号数</li>
+<li>规格化尾数的小数点后第一位总是1，故规定第一位默的“1”不明显表示出来。这样可用23个数位表示24位尾数。</li>
+<li>在浮点数中，除数为0的结果是无穷大，不是溢出异常。（整数除0为异常）</li>
+<li>浮点数的种类<ul>
+<li>无穷大：阶码：全1，尾数：全0</li>
+<li>非数（NaN）：阶码：全1，尾数：非0</li>
+<li>0：全0（符号位可随意） </li>
+<li>非规格化数：阶码：全0，尾数：非0</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>大端与小端存储（都是以数据占用的最小的地址为数据地址）</p>
+<ul>
+<li>大端：MSB的地址是数的地址，</li>
+<li>小端：LSB的地址是数的地址，</li>
+</ul>
+</li>
+<li><p>存储器是按字节编址，每次只能读写某个字地址开始的四个单元中连续的1,2,3或4个字节，边界不对齐虽然节省了空间，但是增加了访存次数</p>
+</li>
+<li><p>运算</p>
+<ul>
+<li>移位<ul>
+<li>无符号数：逻辑左移，逻辑右移：高（低）位移出，低（高）位补0，可能溢出（若高位移出的是1，则左移是发生溢出）</li>
+<li>带符号整数：算数左移，算数右移<ul>
+<li>左移：高位移出，低位补0，可能溢出（若移出的位不等于新的符号位，则溢出）</li>
+<li>右移：低位移出，高位补符，坑发生有效数据丢失</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>位拓展和位截断运算<ul>
+<li>类型转换时可能需要数据拓展或截断<ul>
+<li>拓展：短转长<ul>
+<li>无符号数：0拓展，前面补0</li>
+<li>带符号整数：符号拓展，前面补符</li>
+</ul>
+</li>
+<li>截断：<ul>
+<li>长转短：强制将高位丢弃，故可能发生溢出</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="四-五、ARM指令集架构"><a href="#四-五、ARM指令集架构" class="headerlink" title="四-五、ARM指令集架构"></a>四-五、ARM指令集架构</h3><h5 id="CISC（复杂指令集）"><a href="#CISC（复杂指令集）" class="headerlink" title="CISC（复杂指令集）"></a>CISC（复杂指令集）</h5><h5 id="RISC（精简指令集）"><a href="#RISC（精简指令集）" class="headerlink" title="RISC（精简指令集）"></a>RISC（精简指令集）</h5><ul>
+<li>80-20规律，典型程序中80%的语句仅仅使用处理机中20%的指令</li>
+<li>执行频度高的简单指令，因复杂指令的存在执行速度无法提高</li>
+<li>32位RISC体系结构<ul>
+<li>数据处理指令只能在寄存器上操作</li>
+<li>三操作符格式</li>
+<li>为了高速的位操作将ALU与移位器混合</li>
+<li>绝大多数指令在单个时钟周期内执行</li>
+<li>每条指令都可以被有条件的执行</li>
+</ul>
+</li>
+</ul>
+<h5 id="ARM指令与寻址方式（具体的指令格式建议打印PPT）：略"><a href="#ARM指令与寻址方式（具体的指令格式建议打印PPT）：略" class="headerlink" title="ARM指令与寻址方式（具体的指令格式建议打印PPT）：略"></a>ARM指令与寻址方式（具体的指令格式建议打印PPT）：略</h5><h6 id="立即数寻址"><a href="#立即数寻址" class="headerlink" title="立即数寻址"></a>立即数寻址</h6><p>MOV R0, #0x55;</p>
+<h6 id="寄存器寻址"><a href="#寄存器寻址" class="headerlink" title="寄存器寻址"></a>寄存器寻址</h6><p>MOV R0, R1</p>
+<h6 id="寄存器移位寻址"><a href="#寄存器移位寻址" class="headerlink" title="寄存器移位寻址"></a>寄存器移位寻址</h6><ul>
+<li>逻辑左移：MOV R0, R1, LSL #5; R0 = R1 &lt;&lt; 5</li>
+<li>逻辑右移：MOV R0, R1, LSR #5; R0 = R1 &gt;&gt; 5</li>
+<li>算数右移：MOV R0, R1, ASR #5; R0 = R1 &gt;&gt; 5</li>
+<li><p>循环右移：MOV R0, R1, ROR #5; R0 = R1 &gt;&gt; 5</p>
+</li>
+<li><p>带拓展的循环右移：MOV R0, R1, RRX #5; R0 = R1 &gt;&gt; 5（最左端由标志位C填充）</p>
+</li>
+</ul>
+<h6 id="寄存器间接寻址"><a href="#寄存器间接寻址" class="headerlink" title="寄存器间接寻址"></a>寄存器间接寻址</h6><p>LDR R0, [R1]</p>
+<h6 id="基址变址寻址"><a href="#基址变址寻址" class="headerlink" title="基址变址寻址"></a>基址变址寻址</h6><p>LDR R0, [R1, #5]</p>
+<h6 id="相对寻址"><a href="#相对寻址" class="headerlink" title="相对寻址"></a>相对寻址</h6><p>BEQ process1（跳转至process1，process1是相对于PC的偏移量）</p>
+<p>process1：</p>
+<h6 id="多寄存器寻址"><a href="#多寄存器寻址" class="headerlink" title="多寄存器寻址"></a>多寄存器寻址</h6><p>LDMIA R0!, {R1-R5};</p>
+<ul>
+<li>R1=[R0], R2=[R0+4]……,R5=[R0+16]</li>
+<li>一条指令课实现一组寄存器值的传送。连续的寄存器用“-”，不连续用“，”</li>
+<li>IA表示在完成一次Load操作后R0自增4（Increase After）</li>
+<li>注：一定注意最后R0的值会自增</li>
+</ul>
+<h6 id="块拷贝寻址"><a href="#块拷贝寻址" class="headerlink" title="块拷贝寻址"></a>块拷贝寻址</h6><p>可实现连续地址数据从存储器的某一位置拷贝到另一位置</p>
+<p>LDMIA R0!, {R1-R5}; 从以R0的值为其实地址的存储中取出五个字的数据</p>
+<p>STMIA R0!, {R1-R5};将取出的数据存入以R1的值为起始地址的存储单元中</p>
+<h6 id="堆栈寻址"><a href="#堆栈寻址" class="headerlink" title="堆栈寻址"></a>堆栈寻址</h6><p>STMFD R13!, {R0-R4} 将R0-R4中的数据压入堆栈,<strong>R13</strong>为堆栈指针</p>
+<p>STMFD R13!, {R0-R4} 将R0-R4中的数据出栈,<strong>R13</strong>为堆栈指针</p>
+<h5 id="数据处理指令"><a href="#数据处理指令" class="headerlink" title="数据处理指令"></a>数据处理指令</h5><ul>
+<li><p>MOV数据传送指令    </p>
+<ul>
+<li>MOV{<cond>}{S}  <rd>,<op1>;</op1></rd></cond></li>
+<li>指定相同的寄存器来实现NOP操作，还可以移位一个寄存器</li>
+</ul>
+</li>
+<li><p>MVN数据取反传送指令</p>
+<ul>
+<li>MVN{<cond>}{S}  <rd>,<op1>;</op1></rd></cond></li>
+<li>将op1表示的值按位取反传送到目的寄存器Rd中</li>
+</ul>
+</li>
+<li><p>ADD加法指令</p>
+<ul>
+<li>ADD{<cond>}{S}  <rd>,<rn>,<op2>;</op2></rn></rd></cond></li>
+<li>Rd = Rn + op2</li>
+</ul>
+</li>
+<li><p>ADC带进位加法指令</p>
+<ul>
+<li>ADC{<cond>}{S}  <rd>,<rn>,<op2>; </op2></rn></rd></cond></li>
+<li>Rd= Rn + op2 + carry （标识寄存器）</li>
+</ul>
+<p>实现64位数的加法运算</p>
+<p>第一个 64 位数: 寄存器 R2、R3;低位存在R2</p>
+<p>第二个 64 位数: 寄存器 R4、R5。低位存在R4 </p>
+<p> ADDS R0, R2, R4 ;        加低位的字 </p>
+<p> ADC   R1, R3, R5 ;        加下一个字，不带进位</p>
+</li>
+<li><p>SUB减法指令</p>
+<ul>
+<li>SUB{<cond>}{S}  <rd>,<rn>,<op2>;</op2></rn></rd></cond></li>
+<li>Rd = Rn - op2</li>
+</ul>
+</li>
+<li><p>RSB反向减法指令</p>
+<ul>
+<li>RSB{<cond>}{S}  <rd>,<rn>,<op2>；</op2></rn></rd></cond></li>
+<li>Rd = op2 – Rn</li>
+</ul>
+</li>
+<li><p>SBC带借位减法指令</p>
+<ul>
+<li>SBC{<cond>}{S}  <rd>,<rn>,<op2>;</op2></rn></rd></cond></li>
+<li>Rd= Rn - op2 - !carry </li>
+</ul>
+<p>第一个64位操作数存放在寄存器R2，R3中；低位存在R2</p>
+<p>第二个64位操作数存放在寄存器R4，R5中；低位存在R4，64位结果存放在R0，R1中。</p>
+<p>SUBS  R0，R2，R4； 低32位相减，S表示结果影响条件标志位的值</p>
+<p>SBC  R1，R3，R5；  高32位相减</p>
+</li>
+<li><p>RSC带借位的反向减法指令</p>
+<ul>
+<li>RSC{<cond>}{S} <rd>,<rn>,<op2>;</op2></rn></rd></cond></li>
+<li>Rd = op2 - Rn - !carry</li>
+</ul>
+</li>
+<li><p>MLA 32位乘加指令</p>
+<ul>
+<li>MLA{<cond>}{S}  <rd>,<rn>,<op2>,<op3>;</op3></op2></rn></rd></cond></li>
+<li>Rd =( Rn * op2) + op3</li>
+</ul>
+</li>
+<li><p>AND逻辑与指令（ORR或， EOR异或）</p>
+<ul>
+<li>AND{<cond>}{S}  <rd>,<rn>,<op2>;</op2></rn></rd></cond></li>
+<li>Rd = Rn AND op2</li>
+</ul>
+</li>
+<li><p>BIC位清除指令（相当于集合做差， 集合Rn-op2）</p>
+<ul>
+<li>BIC{<cond>}{S}  <rd>,<rn>,<op2>; </op2></rn></rd></cond></li>
+<li>Rd = Rn AND (!op2)</li>
+</ul>
+</li>
+<li><p>CMP比较指令（只修改标志位，不存储结果）</p>
+<ul>
+<li>CMP{<cond>}  <rn>,<op1>;</op1></rn></cond></li>
+<li>status = Rn – op1 </li>
+</ul>
+</li>
+<li><p>TST位测试指令</p>
+<ul>
+<li>TST{<cond>}  <rn>,<op1>; </op1></rn></cond></li>
+<li>Status = Rn AND op1</li>
+</ul>
+</li>
+</ul>
+<h5 id="跳转指令"><a href="#跳转指令" class="headerlink" title="跳转指令"></a>跳转指令</h5><ul>
+<li><p>跳转</p>
+<ul>
+<li>B{<cond>}  <addr>;</addr></cond></li>
+</ul>
+</li>
+<li><p>BL 带返回的跳转</p>
+<ul>
+<li>BL{<cond>}  <addr>;</addr></cond></li>
+<li>同B指令，但BL指令执行跳转操作的同时，还将PC（寄存器R15）的值保存到LR寄存器（寄存器R14）中。该指令用于实现子程序调用 。程序的返回可通过把LR寄存器的值复制到PC寄存器中来实现</li>
+<li>MOV  R15，R14； 子程序返回</li>
+</ul>
+</li>
+</ul>
+<h5 id="条件执行语句"><a href="#条件执行语句" class="headerlink" title="条件执行语句"></a>条件执行语句</h5><p>ADDNE等</p>
+<ul>
+<li><p>减少指令数量-&gt;较小的内存占用</p>
+</li>
+<li><p>更流畅的流水线执行-&gt;更高的执行效率</p>
+<p>–如果BEQ指令执行，流水线需要3个额外的时钟周期进行流水线重新填充(pipeline refill penalty)</p>
+</li>
+<li><p>适用于较小的分支体（如只含有1-2条指令的if, while等）</p>
+</li>
+</ul>
+<h5 id="Load-Store"><a href="#Load-Store" class="headerlink" title="Load/Store"></a>Load/Store</h5><h6 id="字数据加载"><a href="#字数据加载" class="headerlink" title="字数据加载"></a>字数据加载</h6><ul>
+<li><p>操作数地址为基址加变址，执行后基址不变</p>
+<ul>
+<li>LDR Rd, [Rn, Rm]</li>
+<li>执行后Rn不变</li>
+</ul>
+</li>
+<li><p>操作数地址为基址加变址，执行后基址改变</p>
+<ul>
+<li>LDR Rd, [Rn, Rm]!</li>
+<li>Rn=Rn+Rm</li>
+</ul>
+</li>
+<li><p>操作数地址为基址，执行后基址改变</p>
+<ul>
+<li>LDR  Rd，[Rn]，Rm </li>
+<li>[Rn]-&gt;Rd; Rn+Rm-&gt;Rn</li>
+</ul>
+</li>
+</ul>
+<h6 id="字数据存储"><a href="#字数据存储" class="headerlink" title="字数据存储"></a>字数据存储</h6><ul>
+<li>STR{<cond>}  <rd>,<addr>；<ul>
+<li>与LDR相同</li>
+</ul>
+</addr></rd></cond></li>
+</ul>
+<h6 id="LDM批量数据加载指令"><a href="#LDM批量数据加载指令" class="headerlink" title="LDM批量数据加载指令"></a>LDM批量数据加载指令</h6><ul>
+<li><p>LDM{<cond>}{<type>} <rn>{!}，<regs>{^}；</regs></rn></type></cond></p>
+<ul>
+<li>！：选用后Rn的值最终会写入基址寄存器</li>
+<li>带有^表示异常模式寄存器,此时若LDM包含R15，装载 R15 时恢复 SPSR至CPSR 位。</li>
+</ul>
+</li>
+<li><p>STM{<cond>}{<type>}  <rn>{!}，<regs>{^}；</regs></rn></type></cond></p>
+<ul>
+<li>同LDM</li>
+</ul>
+</li>
+<li><p>注：批量数据存储、加载时，低编号寄存器对应低地址存储单元，与寄存器在指令中出现的次序无关。</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/14/data-analysis-of-the-troll-account/" rel="next" title="data analysis of the troll account">
+                <i class="fa fa-chevron-left"></i> data analysis of the troll account
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/22/Notes of Security Protocols/" rel="prev" title="Notes of Security Protocols">
+                Notes of Security Protocols <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="http://picm.photophoto.cn/015/037/003/0370030771.jpg" alt="Vshows">
+          <p class="site-author-name" itemprop="name">Vshows</p>
+           
+              <p class="site-description motion-element" itemprop="description">Shandong University</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+	  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=415085696&auto=1&height=66"></iframe>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机系统原理笔记"><span class="nav-text">计算机系统原理笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、系统的概念"><span class="nav-text">一、系统的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、数据的机器级表示与处理"><span class="nav-text">二、数据的机器级表示与处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-五、ARM指令集架构"><span class="nav-text">四-五、ARM指令集架构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#CISC（复杂指令集）"><span class="nav-text">CISC（复杂指令集）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#RISC（精简指令集）"><span class="nav-text">RISC（精简指令集）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ARM指令与寻址方式（具体的指令格式建议打印PPT）：略"><span class="nav-text">ARM指令与寻址方式（具体的指令格式建议打印PPT）：略</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#立即数寻址"><span class="nav-text">立即数寻址</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#寄存器寻址"><span class="nav-text">寄存器寻址</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#寄存器移位寻址"><span class="nav-text">寄存器移位寻址</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#寄存器间接寻址"><span class="nav-text">寄存器间接寻址</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#基址变址寻址"><span class="nav-text">基址变址寻址</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#相对寻址"><span class="nav-text">相对寻址</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#多寄存器寻址"><span class="nav-text">多寄存器寻址</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#块拷贝寻址"><span class="nav-text">块拷贝寻址</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#堆栈寻址"><span class="nav-text">堆栈寻址</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据处理指令"><span class="nav-text">数据处理指令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#跳转指令"><span class="nav-text">跳转指令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#条件执行语句"><span class="nav-text">条件执行语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Load-Store"><span class="nav-text">Load/Store</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#字数据加载"><span class="nav-text">字数据加载</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#字数据存储"><span class="nav-text">字数据存储</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#LDM批量数据加载指令"><span class="nav-text">LDM批量数据加载指令</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vshows</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+ 
+
+    
+      
+    
+
+   
+        <!-- UY BEGIN -->
+       <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2131234"></script>
+        <!-- UY END -->
+    
+  
+
+
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
